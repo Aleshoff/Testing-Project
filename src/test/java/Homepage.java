@@ -20,7 +20,7 @@ public class Homepage extends PageObject{
     private WebElement whatYouLearn;
 
     @FindBy(xpath = "/html/body/section[1]/div/div/div/a")
-    private WebElement startEnrolment;
+    private WebElement startEnrolmentButton;
 
     @FindBy(xpath = "/html/body/section[3]/div/div/div[1]/div/div/a")
     private WebElement virtualButton;
@@ -52,6 +52,9 @@ public class Homepage extends PageObject{
     @FindBy(xpath = "/html/body/section[8]/div/div/div[1]/ul/li[5]/span")
     private WebElement studentEmailHeader;
 
+    @FindBy(xpath = "//*[@id=\"learn-fundamentals\"]/div/div/div[2]/h2")
+    private WebElement lernFundamentalsHeader;
+
 
     public Homepage (WebDriver driver) {
         super(driver);
@@ -62,7 +65,7 @@ public class Homepage extends PageObject{
     }
 
     public void ClickOnStartEnrolmentButton () {
-        this.startEnrolment.click();
+        this.startEnrolmentButton.click();
     }
 
     public void ClickOnVirtualButton () {
@@ -76,17 +79,13 @@ public class Homepage extends PageObject{
     }
 
     public void inputTextToEmailForm () {
-        try {
-            this.emailForm.sendKeys("abs@gmail.com");
-            this.submitButton.click();
-            //WebDriverWait wait = new WebDriverWait(driver, 1000);
-            //Alert alert1 = wait.until(alertIsPresent);  it doesn't working. To see later.
-            Alert alert = driver.switchTo().alert();
-            Thread.sleep(2000);
-            alert.accept();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.emailForm.sendKeys("abs@gmail.com");
+        this.submitButton.click();
+        //WebDriverWait wait = new WebDriverWait(driver, 1000);
+        //Alert alert1 = wait.until(alertIsPresent);  it doesn't working. To see later.
+        Alert alert = driver.switchTo().alert();
+        Utils.waitForElementToLoad(2);
+        alert.accept();
     }
 
     public void inputErrorTextToEmailForm () {
@@ -133,5 +132,13 @@ public class Homepage extends PageObject{
     public void ClickOnUpButton () {
         Utils.scrollToElement(driver, studentEmailHeader);
         this.upButton.click();
+    }
+
+    public String verifyLernFundamentalsText () {
+        return this.lernFundamentalsHeader.getText();
+    }
+
+    public String verifyStartEnrollmentText () {
+        return this.startEnrolmentButton.getText();
     }
 }

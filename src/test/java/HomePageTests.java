@@ -1,13 +1,9 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class HomePageTests {
     protected static final WebDriver driver = new ChromeDriver();
@@ -37,16 +33,34 @@ public class HomePageTests {
         driver.get(Utils.BASE_URL);
         Homepage webForm = new Homepage(driver);
         webForm.ClickOnWhatYouLearn();
+        Assert.assertEquals(webForm.verifyLernFundamentalsText(), Constants.LERNFUNDAMENTALS_TEXT);
     }
 
     @Test(testName = "Verify functionality of the Correct SignUp Process")
     public void VerifyEnrollmentProcess() {
         driver.get(Utils.BASE_URL);
-        Homepage webForm = new Homepage(driver);
-        webForm.ClickOnStartEnrolmentButton();
-        Enrollment enrollmentForm = new Enrollment(driver);
-        enrollmentForm.completeForms();
-        enrollmentForm.verifySuccessAttribute();
+        var selectedPage = NavigateEnrollmentPages.EnrollmentPages.enrollmentConfirmationPage;
+        var enrollment = new NavigateEnrollmentPages(driver);
+        var successEnrollment = new EnrollmentConfirmationPage(driver);
+            enrollment.navigateToPage(selectedPage);
+            Utils.waitForElementToLoad(2);
+
+        if (selectedPage.equals(NavigateEnrollmentPages.EnrollmentPages.enrollmentConfirmationPage)) {
+            successEnrollment.verifySuccessAttribute();
+        }
+    }
+
+    @Test(testName = "Verify functionality of Complitness Form Protection of Email Form ")
+    public void complitnessProtectionOfEmailForm() {
+        driver.get(Utils.BASE_URL);
+        var selectedPage = NavigateEnrollmentPages.EnrollmentPages.contactDataPage;
+
+        var enrollment = new NavigateEnrollmentPages(driver);
+        var contactPage = new ContactDataPage(driver);
+
+        enrollment.navigateToPage(selectedPage);
+        contactPage.unCompleteContactDataForms();
+        Utils.waitForElementToLoad(2);
     }
 
     @Test(testName = "Verify functionality for Virtual button")
@@ -92,6 +106,7 @@ public class HomePageTests {
         driver.get(Utils.BASE_URL);
         Homepage webForm = new Homepage(driver);
         webForm.ClickOnUpButton();
+        Assert.assertEquals(webForm.verifyStartEnrollmentText(), Constants.STARTENROLLMENT_TEXT);
     }
 
     @AfterSuite
