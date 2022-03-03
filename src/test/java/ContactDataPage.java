@@ -33,11 +33,11 @@ public class ContactDataPage extends PageObject {
 
     public void completeContactDataForms () {
 
-        this.emailForm.sendKeys("aleshoff@gmail.com");
-        this.phoneForm.sendKeys("000-00-00");
-        this.countryForm.sendKeys("Romania");
-        this.cityForm.sendKeys("Brasov");
-        this.postecodeForm.sendKeys("520180");
+        this.emailForm.sendKeys(Constants.EMAIL_TEXT);
+        this.phoneForm.sendKeys(Constants.TELEFONENUMBER_TEXT);
+        this.countryForm.sendKeys(Constants.COUNTRY_TEXT);
+        this.cityForm.sendKeys(Constants.CITY_TEXT);
+        this.postecodeForm.sendKeys(Constants.POSTINDEX_TEXT);
         Utils.scrollToElement(driver, postecodeHeader);
 
         this.nextButton1.click();
@@ -45,10 +45,10 @@ public class ContactDataPage extends PageObject {
 
     public void unCompleteContactDataForms () {
 
-        this.phoneForm.sendKeys("000-00-00");
-        this.countryForm.sendKeys("Romania");
-        this.cityForm.sendKeys("Brasov");
-        this.postecodeForm.sendKeys("520180");
+        this.phoneForm.sendKeys(Constants.TELEFONENUMBER_TEXT);
+        this.countryForm.sendKeys(Constants.COUNTRY_TEXT);
+        this.cityForm.sendKeys(Constants.CITY_TEXT);
+        this.postecodeForm.sendKeys(Constants.POSTINDEX_TEXT);
         Utils.scrollToElement(driver, postecodeHeader);
         this.nextButton1.click();
 

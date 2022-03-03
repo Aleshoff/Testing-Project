@@ -50,8 +50,8 @@ public class HomePageTests {
         }
     }
 
-    @Test(testName = "Verify functionality of Complitness Form Protection of Email Form ")
-    public void complitnessProtectionOfEmailForm() {
+    @Test(testName = "Verify functionality of Completeness Form Protection of Email Form ")
+    public void completenessProtectionOfEmailForm() {
         driver.get(Utils.BASE_URL);
         var selectedPage = NavigateEnrollmentPages.EnrollmentPages.contactDataPage;
 
@@ -72,11 +72,11 @@ public class HomePageTests {
         Assert.assertEquals(virtualElementForm.verifyVirtualText(), Constants.VIRTUAL_TEXT);
     }
 
-    @Test(testName = "Verify functionality for LearnSelenium button")
-    public void VerifyLearnSeleniumButton() {
+    @Test(testName = "Verify functionality of Learn Fundamentals button")
+    public void VerifyFundamentalsButton() {
         driver.get(Utils.BASE_URL);
         Homepage webForm = new Homepage(driver);
-        webForm.ClickOnLearnSeleniumButton();
+        webForm.ClickOnFundamentalsButton();
         Fundamentals fundamentalsElementForm = new Fundamentals(driver);
         Assert.assertEquals(fundamentalsElementForm.fundamentalsPageText(), Constants.FUNDAMENTAL_TEXT);
     }

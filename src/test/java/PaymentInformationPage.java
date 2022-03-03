@@ -32,11 +32,11 @@ public class PaymentInformationPage extends PageObject {
 
     public void completePaymentForms () {
 
-        this.cardHolderForm.sendKeys("Al oshyn Olexandr");
-        this.cardnumberForm.sendKeys("1111-0000-2222-3333");
-        this.cardCvcForm.sendKeys("123");
+        this.cardHolderForm.sendKeys(Constants.SURNAME_TEXT + Constants.NAME_TEXT);
+        this.cardnumberForm.sendKeys(Constants.CARDNUMBER_TEXT);
+        this.cardCvcForm.sendKeys(Constants.CVCCODE_TEXT);
         Utils.scrollToElement(driver, expiryDateHeader);
-        this.monthForm.sendKeys("july");
-        this.yearForm.sendKeys("2022");
+        this.monthForm.sendKeys(Constants.EXPIRYMONTH_TEXT);
+        this.yearForm.sendKeys(Constants.EXPIRYYEAR_TEXT);
     }
 }

@@ -30,11 +30,11 @@ public class PersonalInformationPage extends PageObject {
     }
 
     public void completePersonalPageForms () {
-        this.firstNameForm.sendKeys("Olexandr");
-        this.lastNameForm.sendKeys("Al oshyn");
-        this.userNameForm.sendKeys("Aleshoff");
-        this.passwordForm.sendKeys("abc");
-        this.confirmPasswordForm.sendKeys("abc");
+        this.firstNameForm.sendKeys(Constants.NAME_TEXT);
+        this.lastNameForm.sendKeys(Constants.SURNAME_TEXT);
+        this.userNameForm.sendKeys(Constants.USERNAME_TEXT);
+        this.passwordForm.sendKeys(Constants.PASSWORD_TEXT);
+        this.confirmPasswordForm.sendKeys(Constants.PASSWORD_TEXT);
         Utils.scrollToElement(driver, confirmPasswordHeader);
         this.nextButton.click();
     }

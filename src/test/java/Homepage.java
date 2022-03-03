@@ -28,11 +28,11 @@ public class Homepage extends PageObject{
     @FindBy(xpath = "/html/body/section[3]/div/div/div[1]/div/div/h3")
     private WebElement virtualHeader;
 
-    @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/a")
-    private WebElement learnSeleniumButton;
+    @FindBy(xpath = "//*[@id=\"learn-fundamentals\"]/div/div/div[2]/a")
+    private WebElement learnFundamentalsButton;
 
-    @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/h2")
-    private WebElement learnSeleniumHeader;
+    @FindBy(xpath = "//*[@id=\"learn-fundamentals\"]/div/div/div[2]/h2")
+    private WebElement learnFundamentalsHeader;
 
     @FindBy(xpath = "//*[@id=\"instructors\"]/div/div/div[1]/div/div/h3")
     private WebElement johnDoeHeader;
@@ -73,16 +73,14 @@ public class Homepage extends PageObject{
         this.virtualButton.click();
     }
 
-    public void ClickOnLearnSeleniumButton () {
-        Utils.scrollToElement(driver, learnSeleniumHeader);
-        this.learnSeleniumButton.click();
+    public void ClickOnFundamentalsButton () {
+        Utils.scrollToElement(driver, learnFundamentalsHeader);
+        this.learnFundamentalsButton.click();
     }
 
     public void inputTextToEmailForm () {
-        this.emailForm.sendKeys("abs@gmail.com");
+        this.emailForm.sendKeys(Constants.EMAIL_TEXT);
         this.submitButton.click();
-        //WebDriverWait wait = new WebDriverWait(driver, 1000);
-        //Alert alert1 = wait.until(alertIsPresent);  it doesn't working. To see later.
         Alert alert = driver.switchTo().alert();
         Utils.waitForElementToLoad(2);
         alert.accept();
@@ -90,8 +88,9 @@ public class Homepage extends PageObject{
 
     public void inputErrorTextToEmailForm () {
 
-            this.emailForm.sendKeys("abs");
-            this.submitButton.click();
+        this.emailForm.sendKeys(Constants.INCORRECTEMAIL_TEXT);
+        this.submitButton.click();
+
     }
 
     public void verifyErrorAttribute () {
@@ -111,7 +110,12 @@ public class Homepage extends PageObject{
             Utils.scrollToElement(driver, johnDoeHeader);
             WebElement newTwitterButton = twitterButtons.get(i);
             newTwitterButton.click();
-            Assert.assertEquals(driver.getTitle(), Constants.TWITTER_TITLE);
+            try {
+                Assert.assertEquals(driver.getTitle(), Constants.TWITTER_TITLE1);
+            }
+            catch (AssertionError e) {
+                Assert.assertEquals(driver.getTitle(), Constants.TWITTER_TITLE2);
+            }
             driver.get(Utils.BASE_URL);
         }
     }
